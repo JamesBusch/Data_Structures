@@ -72,4 +72,15 @@ void insertFront(void *data, List *list);
  * ******************/
 void insertBack(void *data, List *list);
 
+/*********************
+ * printList
+ * 
+ * This is the function to print the entire list. It is important that you
+ * think of formating. This will only print the given string from the passed print function
+ * if you want new lines or spaces you must think about that in the passed print function
+ * 
+ * @param List *list, list that is wanted to print
+ ********************/
+void printList(List *list);
+
 #endif
