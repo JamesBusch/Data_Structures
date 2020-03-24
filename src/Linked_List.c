@@ -1,6 +1,6 @@
 /**********************
  * James Busch
- * 16/03/20
+ * 24/03/20
  * ver 0.01
  * 
  * This is the code for the Linked_list API
@@ -27,14 +27,29 @@ void insertFront(void *data, List *list){
     Node *toAdd = malloc(sizeof(Node));
     toAdd->data = data;
     toAdd->behind = NULL;
+
     if(list->length == 0){
         toAdd->infront = NULL;
-        list->head = toAdd;
         list->tail = toAdd;
     }else{
         list->head->behind = toAdd;
-        list->head = toAdd;
     }
+    list->head = toAdd;
     list->length++;
+}
 
+void insertBack(void *data, List *list){
+    if(data == NULL || list == NULL) return;
+    Node *toAdd = malloc(sizeof(Node));
+    toAdd->data = data;
+    toAdd->infront = NULL;
+
+    if(list->length == 0){
+        toAdd->behind = NULL;
+        list->head = toAdd;
+    }else{
+        list->tail->infront = toAdd; 
+    }
+    list->tail = toAdd;
+    list->length++;
 }
