@@ -21,3 +21,9 @@ $(BINDIR)main.o: $(SRCDIR)main.c
 
 $(BINDIR)Linked_List.o: $(SRCDIR)Linked_List.c $(INCDIR)Linked_List.h
 	$(CC) $(CFLAGS) -c $(SRCDIR)Linked_List.c -o $@
+
+run:
+	$(BINDIR)tester
+
+clean:
+	rm $(BINDIR)main.o $(BINDIR)Linked_List.o $(BINDIR)tester
