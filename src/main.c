@@ -37,7 +37,12 @@ int main(){
     }
     printList(testList);
 
+    printf("===Data at index 0: %d\n", ((Data*)(getDataFromIndex(testList, 0)))->stuff);
+    printf("===Data at index 2: %d\n", ((Data*)(getDataFromIndex(testList, 2)))->stuff);
+
     freeList(testList);
+
+
 
 
     return 0;
