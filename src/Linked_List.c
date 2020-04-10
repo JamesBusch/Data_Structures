@@ -77,6 +77,20 @@ bool freeList(List *list){
     return TRUE;
 }
 
+void *getDataFromIndex(List *list, int index){
+    if(list == NULL) return NULL;
+    if(index >= list->length || index < 0) return NULL;
+    if(list->length == 0) return NULL;
+
+    Node *currNode = list->head;
+
+    for(int i = 1; i < index + 1; i++){
+        currNode = currNode->infront;
+    }
+
+    return currNode->data;
+}
+
 void printList(List *list){
     if(list == NULL) return;
 
