@@ -25,5 +25,8 @@ $(BINDIR)Linked_List.o: $(SRCDIR)Linked_List.c $(INCDIR)Linked_List.h
 run:
 	$(BINDIR)tester
 
+memtest:
+	valgrind --leak-check=full $(BINDIR)tester
+
 clean:
 	rm $(BINDIR)main.o $(BINDIR)Linked_List.o $(BINDIR)tester
