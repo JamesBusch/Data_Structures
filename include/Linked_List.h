@@ -76,6 +76,29 @@ bool insertFront(void *data, List *list);
  * ******************/
 bool insertBack(void *data, List *list);
 
+/*********************
+ * getDataFromIndex
+ * 
+ * This is the function that gets the data from a given index in the list
+ * If this is too be used multiple times in a row i.e in a forloop. Please use the 
+ * TBD pointer instead as this will make it O(n^2) as it uses a for loop to search
+ * 
+ * @param List *list, Must exist, must be valid
+ * @param int index, Must be in the inclusive range 0-n where n is the length of the given list
+ * @return void* to the wanted data
+ ********************/
+void *getDataFromIndex(List *list, int index);
+
+/*********************
+ * freeList
+ * 
+ * This is the function to free the list. It uses the given free
+ * function to free the internal data placed into the list then frees
+ * the nodes and finally the list data itself
+ * 
+ * @param List *list, the list that is wanted to be freed. Must exist and have been created by init list.
+ * @return true if list is freed false if error occured
+ ********************/
 bool freeList(List *list);
 
 /*********************
