@@ -39,6 +39,8 @@ typedef struct List{
     char* (*printData)(void* toPrint);
 }List;
 
+typedef enum {TRUE = 1, FALSE = 0} bool;
+
 /*********************
  * initList
  * 
@@ -59,8 +61,9 @@ List *initList(void (*delete)(void *toDelete), int(*compare)(const void *, const
  * 
  * @param void *data, data to add too the front of the list
  * @param List *list, the list too add the data too
+ * @return true if was inserted, false if failed
  ********************/
-void insertFront(void *data, List *list);
+bool insertFront(void *data, List *list);
 
 /*********************
  * insertBack
@@ -69,8 +72,11 @@ void insertFront(void *data, List *list);
  * 
  * @param void *data, data to add too the back of the list
  * @param List *list, the list too add the data too
+ * @return true if was inserted, false if failed
  * ******************/
-void insertBack(void *data, List *list);
+bool insertBack(void *data, List *list);
+
+bool freeList(List *list);
 
 /*********************
  * printList
