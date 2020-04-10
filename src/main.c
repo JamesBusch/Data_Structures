@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include "Linked_List.h"
 
-void dummyDelete(void *toDelete);
+void delete(void *toDelete);
 int compare(const void *dataOne, const void *dataTwo);
 char *print(void *data);
 
@@ -20,7 +20,7 @@ typedef struct Data{
 }Data;
 
 int main(){
-    List *testList = initList(&dummyDelete, &compare, &print);
+    List *testList = initList(&delete, &compare, &print);
     Data *data;
     for(int i = 0; i < 2; i++){
         data = malloc(sizeof(Data));
@@ -29,19 +29,27 @@ int main(){
 
         data = NULL;
     }
+
+    for(int i = 3; i < 6; i++){
+        data = malloc(sizeof(Data));
+        data->stuff = i;
+        insertBack(data, testList);
+    }
     printList(testList);
+
+    freeList(testList);
 
 
     return 0;
 }
 
-void dummyDelete(void *toDelete){
-
+void delete(void *toDelete){
+    free(toDelete);
     return;
 }
 
 int compare(const void *dataOne, const void *dataTwo){
-    return (int*)(dataOne) - (int*)(dataTwo);
+    return ((Data*)dataOne)->stuff - ((Data*)dataTwo)->stuff;
 }
 
 char *print(void *data){
