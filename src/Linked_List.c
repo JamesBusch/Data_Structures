@@ -25,8 +25,8 @@ List *initList(void (*delete)(void *toPrint), int(*compare)(const void *compOne,
     return newList;
 }
 
-void insertFront(void *data, List *list){
-    if(data == NULL || list == NULL) return;
+bool insertFront(void *data, List *list){
+    if(data == NULL || list == NULL) return FALSE;
     Node *toAdd = malloc(sizeof(Node));
     toAdd->data = data;
     toAdd->behind = NULL;
@@ -40,10 +40,11 @@ void insertFront(void *data, List *list){
     }
     list->head = toAdd;
     list->length++;
+    return TRUE;
 }
 
-void insertBack(void *data, List *list){
-    if(data == NULL || list == NULL) return;
+bool insertBack(void *data, List *list){
+    if(data == NULL || list == NULL) return FALSE;
     Node *toAdd = malloc(sizeof(Node));
     toAdd->data = data;
     toAdd->infront = NULL;
@@ -53,9 +54,27 @@ void insertBack(void *data, List *list){
         list->head = toAdd;
     }else{
         list->tail->infront = toAdd; 
+        toAdd->behind = list->tail;
     }
     list->tail = toAdd;
     list->length++;
+    return TRUE;
+}
+
+bool freeList(List *list){
+    if(list == NULL) return FALSE;
+    Node *currNode = list->head;
+    Node *toFree;
+    for(int i = 0; i < list->length; i++){
+        list->deleteData(currNode->data);
+        toFree = currNode;
+        currNode = currNode->infront;
+
+        free(toFree);
+    }
+    free(list);
+
+    return TRUE;
 }
 
 void printList(List *list){
