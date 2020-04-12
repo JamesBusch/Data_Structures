@@ -96,6 +96,37 @@ bool insertAtIndex(void *data, List *list, int index){
     return TRUE;
 }
 
+bool removeFront(List *list){
+    if(list == NULL || list->length == 0) return FALSE;
+    list->deleteData(list->head->data);
+
+    if(list->length == 1){
+        list->tail = NULL;
+        free(list->head);
+        list->head = NULL;
+    }else{
+        list->head = list->head->infront;
+        free(list->head->behind);
+        list->head->behind = NULL;
+    }
+
+    list->length--;
+    return TRUE;
+}
+
+bool removeBack(List *list){
+    if(list == NULL || list->length == 0) return FALSE;
+    if(list->length == 1) return removeFront(list);//This is so i dont have to re-write code
+    list->deleteData(list->tail->data);
+
+    list->tail = list->tail->behind;
+    free(list->tail->infront);
+    list->tail->infront = NULL;
+
+    list->length--;
+    return TRUE;
+}
+
 bool freeList(List *list){
     if(list == NULL) return FALSE;
     Node *currNode = list->head;

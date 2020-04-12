@@ -88,6 +88,9 @@ bool insertBack(void *data, List *list);
  ********************/
 bool insertAtIndex(void *data, List *list, int index);
 
+bool removeFront(List *list);
+bool removeBack(List *list);
+
 /*********************
  * getDataFromIndex
  * 
