@@ -1,11 +1,11 @@
 /*********************
  * James Busch
- * 24/03/20
- * ver 0.01
+ * 12/04/20
+ * ver 0.02
  * 
  * This is the include for the Linked_List API.
  * If you wish too use any of this for school projects
- * please sight this code to avoid any issues that might arise
+ * please sight this code to avoid any issues that might arise.
  ********************/
 #ifndef LINKED_LIST_H_
 #define LINKED_LIST_H_
@@ -75,6 +75,18 @@ bool insertFront(void *data, List *list);
  * @return true if was inserted, false if failed
  * ******************/
 bool insertBack(void *data, List *list);
+
+/*********************
+ * insertAtIndex
+ * 
+ * This is the function to insert data at a given index
+ * 
+ * @param void *data, data to add too the specified index, must not be null and must match data set
+ * @param List *list, This is the wanted list too insert in
+ * @param int index, this is the wanted index to insert in, must be 0 <= index <= n where n is the size of the array
+ * @return true if it was inserted, false if failed
+ ********************/
+bool insertAtIndex(void *data, List *list, int index);
 
 /*********************
  * getDataFromIndex

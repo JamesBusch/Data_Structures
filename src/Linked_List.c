@@ -1,7 +1,7 @@
 /**********************
  * James Busch
- * 24/03/20
- * ver 0.01
+ * 12/04/20
+ * ver 0.02
  * 
  * This is the code for the Linked_list API
  **********************/
@@ -57,6 +57,41 @@ bool insertBack(void *data, List *list){
         toAdd->behind = list->tail;
     }
     list->tail = toAdd;
+    list->length++;
+    return TRUE;
+}
+
+bool insertAtIndex(void *data, List *list, int index){
+    if(data == NULL || list == NULL) return FALSE;
+    if(index < 0 || index > list->length) return FALSE;
+    if(index == 0){
+        return insertFront(data, list);
+    }else if(index == list->length){
+        return insertBack(data, list);
+    }
+
+    Node *toPlace = malloc(sizeof(Node));
+    toPlace->data = data;
+
+    //This is to attempt to make the linked list more efficent with larger data by starting either at the
+    //Start or end based on if the wanted index is greater than or less than the half way point of the length
+    Node *currNode;
+    if(index < list->length / 2){//Start at front
+        currNode = list->head->infront;//Because the start avoids placements at the start we can skip one and start one after the head
+        for(int i = 1; i < index; i++){
+            currNode = currNode->infront;
+        }
+    }else{//start at back
+        currNode = list->tail;
+        for(int i = list->length - 1; i > index; i--){
+            currNode = currNode->behind;
+        }
+    }
+    toPlace->behind = currNode->behind;
+    toPlace->infront = currNode;
+    currNode->behind->infront = toPlace;
+    currNode->behind = toPlace;
+
     list->length++;
     return TRUE;
 }
