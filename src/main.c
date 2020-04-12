@@ -44,6 +44,12 @@ int main(){
     data = malloc(sizeof(Data));
     data->stuff = 710;
     insertAtIndex(data, testList, 5);
+    printList(testList);
+
+    removeFront(testList);
+    removeBack(testList);
+
+    printf("===============After removing=================\n");
 
     printList(testList);
 
