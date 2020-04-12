@@ -1,6 +1,6 @@
 /*********************
  * James Busch
- * 24/03/20
+ * 12/04/20
  * 
  * This is the tester for the Data_Structures API.
  * As I build each data structure I will push the current tester
@@ -22,7 +22,7 @@ typedef struct Data{
 int main(){
     List *testList = initList(&delete, &compare, &print);
     Data *data;
-    for(int i = 0; i < 2; i++){
+    for(int i = 0; i < 3; i++){
         data = malloc(sizeof(Data));
         data->stuff = i;
         insertFront(data, testList);
@@ -34,7 +34,17 @@ int main(){
         data = malloc(sizeof(Data));
         data->stuff = i;
         insertBack(data, testList);
+        
+        data = NULL;
     }
+    data = malloc(sizeof(Data));
+    data->stuff = 420;
+    insertAtIndex(data, testList, 2);
+
+    data = malloc(sizeof(Data));
+    data->stuff = 710;
+    insertAtIndex(data, testList, 5);
+
     printList(testList);
 
     printf("===Data at index 0: %d\n", ((Data*)(getDataFromIndex(testList, 0)))->stuff);
