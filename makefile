@@ -9,7 +9,7 @@ INCDIR = ./include/
 
 CC = gcc
 CFLAGS = -std=c99 -Wall -g -pedantic -I./include
-OBJECTS = $(BINDIR)main.o $(BINDIR)Linked_List.o
+OBJECTS = $(BINDIR)main.o $(BINDIR)Linked_List.o $(BINDIR)Linked_List_Tester.o
 
 all: $(BINDIR)tester
 
@@ -21,6 +21,9 @@ $(BINDIR)main.o: $(SRCDIR)main.c
 
 $(BINDIR)Linked_List.o: $(SRCDIR)Linked_List.c $(INCDIR)Linked_List.h
 	$(CC) $(CFLAGS) -c $(SRCDIR)Linked_List.c -o $@
+
+$(BINDIR)Linked_List_Tester.o: $(SRCDIR)Linked_List_Tester.c $(INCDIR)Linked_List_Tester.h
+	$(CC) $(CFLAGS) -c $(SRCDIR)Linked_List_Tester.c -o $@
 
 run:
 	$(BINDIR)tester
