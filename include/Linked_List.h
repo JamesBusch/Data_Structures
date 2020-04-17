@@ -1,7 +1,7 @@
 /*********************
  * James Busch
- * 12/04/20
- * ver 0.02
+ * 17/04/20
+ * ver 0.03
  * 
  * This is the include for the Linked_List API.
  * If you wish too use any of this for school projects
@@ -88,8 +88,28 @@ bool insertBack(void *data, List *list);
  ********************/
 bool insertAtIndex(void *data, List *list, int index);
 
-bool removeFront(List *list);
-bool removeBack(List *list);
+/*********************
+ * removeFront
+ * 
+ * This function removes the node from the front of the list
+ * It is important too free the data returned as it will cause 
+ * mem leaks.
+ * 
+ * @param List *list, the list to remove from the front. Must exist and contain data
+ * @return void *, the data in the front node that is being removed. Be sure too free it. Returns NULL if error occurs
+ ********************/
+void *removeFront(List *list);
+
+/*********************
+ * removeBack
+ * 
+ * This function removes the node from the back of the list
+ * It is important too free the data returned as it will cause mem leaks
+ * 
+ * @param List *list, the list to remove from the front. Must exist and contain data
+ * @return void *, the data in the front node that is being removed. Be sure too free it. Returns NULL if error occurs
+ ********************/
+void *removeBack(List *list);
 
 /*********************
  * getDataFromIndex

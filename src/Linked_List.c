@@ -1,7 +1,7 @@
 /**********************
  * James Busch
- * 12/04/20
- * ver 0.02
+ * 17/04/20
+ * ver 0.03
  * 
  * This is the code for the Linked_list API
  **********************/
@@ -96,9 +96,9 @@ bool insertAtIndex(void *data, List *list, int index){
     return TRUE;
 }
 
-bool removeFront(List *list){
-    if(list == NULL || list->length == 0) return FALSE;
-    list->deleteData(list->head->data);
+void *removeFront(List *list){
+    if(list == NULL || list->length == 0) return NULL;
+    void *dataHolder = list->head->data;
 
     if(list->length == 1){
         list->tail = NULL;
@@ -111,20 +111,20 @@ bool removeFront(List *list){
     }
 
     list->length--;
-    return TRUE;
+    return dataHolder;
 }
 
-bool removeBack(List *list){
-    if(list == NULL || list->length == 0) return FALSE;
+void *removeBack(List *list){
+    if(list == NULL || list->length == 0) return NULL;
     if(list->length == 1) return removeFront(list);//This is so i dont have to re-write code
-    list->deleteData(list->tail->data);
+    void *dataHolder = list->tail->data;
 
     list->tail = list->tail->behind;
     free(list->tail->infront);
     list->tail->infront = NULL;
 
     list->length--;
-    return TRUE;
+    return dataHolder;
 }
 
 bool freeList(List *list){
