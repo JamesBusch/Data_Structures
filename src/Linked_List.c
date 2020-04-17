@@ -174,10 +174,22 @@ bool freeList(List *list){
     return TRUE;
 }
 
+void *getDataFromFront(List *list){
+    if(list == NULL || list->length < 1) return NULL;
+
+    return list->head->data;
+}
+
+void *getDataFromBack(List *list){
+    if(list == NULL || list->length < 1) return NULL;
+
+    return list->tail->data;
+}
+
 void *getDataFromIndex(List *list, int index){
     if(list == NULL) return NULL;
     if(index >= list->length || index < 0) return NULL;
-    if(list->length == 0) return NULL;
+    if(list->length < 1) return NULL;
 
     Node *currNode = list->head;
 

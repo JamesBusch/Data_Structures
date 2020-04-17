@@ -111,7 +111,20 @@ void *removeFront(List *list);
  ********************/
 void *removeBack(List *list);
 
+
+/*********************
+ * removeAtIndex
+ * 
+ * This function removes the node from a wanted index
+ * It is important to free the data returned as it will cause mem leaks
+ * 
+ * @param List *list, the list to remove from the wanted index. Must exist and contain data
+ * @param int index, the wanted index to remove, must be 0 < index < n where n is the length of the list
+ ********************/
 void *removeAtIndex(List *list, int index);
+
+void *getDataFromFront(List *list);
+void *getDataFromBack(List *list);
 
 /*********************
  * getDataFromIndex
