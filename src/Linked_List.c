@@ -25,7 +25,7 @@ List *initList(void (*delete)(void *toPrint), int(*compare)(const void *compOne,
     return newList;
 }
 
-bool insertFront(void *data, List *list){
+bool insertFront(List *list, void *data){
     if(data == NULL || list == NULL) return FALSE;
     Node *toAdd = malloc(sizeof(Node));
     toAdd->data = data;
@@ -43,7 +43,7 @@ bool insertFront(void *data, List *list){
     return TRUE;
 }
 
-bool insertBack(void *data, List *list){
+bool insertBack(List *list, void *data){
     if(data == NULL || list == NULL) return FALSE;
     Node *toAdd = malloc(sizeof(Node));
     toAdd->data = data;
@@ -61,7 +61,7 @@ bool insertBack(void *data, List *list){
     return TRUE;
 }
 
-bool insertAtIndex(void *data, List *list, int index){
+bool insertAtIndex(List *list, void *data, int index){
     if(data == NULL || list == NULL) return FALSE;
     if(index < 0 || index > list->length) return FALSE;
     if(index == 0){

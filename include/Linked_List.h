@@ -1,7 +1,7 @@
 /*********************
  * James Busch
  * 17/04/20
- * ver 0.03
+ * ver 0.04
  * 
  * This is the include for the Linked_List API.
  * If you wish too use any of this for school projects
@@ -63,7 +63,7 @@ List *initList(void (*delete)(void *toDelete), int(*compare)(const void *, const
  * @param List *list, the list too add the data too
  * @return true if was inserted, false if failed
  ********************/
-bool insertFront(void *data, List *list);
+bool insertFront(List *list, void *data);
 
 /*********************
  * insertBack
@@ -74,7 +74,7 @@ bool insertFront(void *data, List *list);
  * @param List *list, the list too add the data too
  * @return true if was inserted, false if failed
  * ******************/
-bool insertBack(void *data, List *list);
+bool insertBack(List *list, void *data);
 
 /*********************
  * insertAtIndex
@@ -86,7 +86,7 @@ bool insertBack(void *data, List *list);
  * @param int index, this is the wanted index to insert in, must be 0 <= index <= n where n is the size of the array
  * @return true if it was inserted, false if failed
  ********************/
-bool insertAtIndex(void *data, List *list, int index);
+bool insertAtIndex(List *list, void *data, int index);
 
 /*********************
  * removeFront
@@ -123,7 +123,24 @@ void *removeBack(List *list);
  ********************/
 void *removeAtIndex(List *list, int index);
 
+/*********************
+ * getDataFromFront
+ * 
+ * This gets the data from the front of the list
+ * 
+ * @param List *list, the list that you want to get the data from the front
+ * @return void *, the data from the list
+ ********************/
 void *getDataFromFront(List *list);
+
+/*********************
+ * getDataFromBack
+ * 
+ * This gets the data from the back of the list
+ * 
+ * @param List *list, the list that you want to get the data from the back
+ * @return void *, the data from the list
+ ********************/
 void *getDataFromBack(List *list);
 
 /*********************
