@@ -46,8 +46,12 @@ int main(){
     insertAtIndex(data, testList, 5);
     printList(testList);
 
-    removeFront(testList);
-    removeBack(testList);
+
+    data = (Data *)removeFront(testList);
+    free(data);
+
+    data = (Data *)removeBack(testList);
+    free(data);
 
     printf("===============After removing=================\n");
 
