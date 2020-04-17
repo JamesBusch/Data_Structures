@@ -53,6 +53,9 @@ int main(){
     data = (Data *)removeBack(testList);
     free(data);
 
+    data = (Data *)removeAtIndex(testList, 2);
+    free(data);
+
     printf("===============After removing=================\n");
 
     printList(testList);
