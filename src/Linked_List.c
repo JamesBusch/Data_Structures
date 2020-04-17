@@ -127,6 +127,37 @@ void *removeBack(List *list){
     return dataHolder;
 }
 
+void *removeAtIndex(List *list, int index){
+    if(list == NULL || list->length == 0) return NULL;
+    if(index < 0 || index >= list->length) return NULL;
+    if(index == 0) return removeFront(list);
+    if(index == list->length - 1) return removeBack(list);
+
+    void *dataHolder;
+
+    Node *currNode;
+    if(index < list->length / 2){//Start at front
+        currNode = list->head->infront;//Because the start avoids placements at the start we can skip one and start one after the head
+        for(int i = 1; i < index; i++){
+            currNode = currNode->infront;
+        }
+    }else{//start at back
+        currNode = list->tail;
+        for(int i = list->length - 1; i > index; i--){
+            currNode = currNode->behind;
+        }
+    }
+
+    dataHolder = currNode->data;
+    currNode->behind->infront = currNode->infront;
+    currNode->infront->behind = currNode->behind;
+    free(currNode);
+
+
+    list->length--;
+    return dataHolder;
+}
+
 bool freeList(List *list){
     if(list == NULL) return FALSE;
     Node *currNode = list->head;

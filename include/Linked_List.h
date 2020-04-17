@@ -111,6 +111,8 @@ void *removeFront(List *list);
  ********************/
 void *removeBack(List *list);
 
+void *removeAtIndex(List *list, int index);
+
 /*********************
  * getDataFromIndex
  * 
