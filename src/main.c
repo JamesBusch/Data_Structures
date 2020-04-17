@@ -14,7 +14,8 @@
 
 
 int main(){
-    
+    LinkedListTest();
+
     return 0;
 }
 
