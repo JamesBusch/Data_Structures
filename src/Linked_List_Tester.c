@@ -2,7 +2,7 @@
  * James Busch
  * 19/04/20
  * 
- * ver 0.02
+ * ver 0.03
  * This is the full tester for the linked list API
  ********************/
 
@@ -54,7 +54,7 @@ void LinkedListTest(){
     printf("===================1.3 Remove functions======================\n");
     assert(removeFront(NULL) == NULL);
     assert(removeFront(list) == NULL);
-    assert(removeAtIndex(NULL, 0) == NULL);//TODO add testing for invalid indexes in a list with data
+    assert(removeAtIndex(NULL, 0) == NULL);
     assert(removeAtIndex(list, 0) == NULL);
     assert(removeAtIndex(list, -1) == NULL);
     assert(removeBack(NULL) == NULL);
@@ -159,5 +159,164 @@ void LinkedListTest(){
     printf("Passed\n");
 
     printf("====================2.3 insertAtIndex========================\n");
+    list = initList(delete, compare, print);
+    data = malloc(sizeof(Data));
+    data->stuff = 0;
+    
+    assert(insertAtIndex(list, data, -1) == FALSE);
+    assert(insertAtIndex(list, data, 1) == FALSE);
+    insertAtIndex(list, data, 0);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 0);
+    assert(((Data*)(list->tail->data))->stuff == 0);
+    assert(list->head->behind == NULL);
+    assert(list->head->infront == NULL);
+    assert(list->tail->behind == NULL);
+    assert(list->tail->infront == NULL);
 
+    data = malloc(sizeof(Data));
+    data->stuff = 1;
+    assert(insertAtIndex(list, data, -1) == FALSE);
+    assert(insertAtIndex(list, data, 2) == FALSE);
+    insertAtIndex(list, data, 1);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 0);
+    assert(((Data*)(list->tail->data))->stuff == 1);
+    assert(((Data*)(list->head->infront->data))->stuff == 1);
+    assert(((Data*)(list->tail->behind->data))->stuff == 0);
+    assert(list->head->behind == NULL);
+    assert(list->tail->infront == NULL);
+
+    data = malloc(sizeof(Data));
+    data->stuff = 2;
+    assert(insertAtIndex(list, data, -100) == FALSE);
+    assert(insertAtIndex(list, data, 3) == FALSE);
+    insertAtIndex(list, data, 1);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 0);
+    assert(((Data*)(list->tail->data))->stuff == 1);
+    assert(((Data*)(list->head->infront->data))->stuff == 2);
+    assert(((Data*)(list->tail->behind->data))->stuff == 2);
+    assert(((Data*)(list->head->infront->infront->data))->stuff == 1);
+    assert(((Data*)(list->tail->behind->behind->data))->stuff == 0);
+    assert(list->head->behind == NULL);
+    assert(list->tail->infront == NULL);
+    freeList(list);
+    printf("Passed\n");
+
+    printf("===================Test 3 remove functions===================\n\n");
+    printf("=====================3.1 removeFront=========================\n");
+    list = initList(delete, compare, print);
+    assert(removeFront(list) == NULL);
+    for(int i = 0; i < 5; i++){
+        data = malloc(sizeof(Data));
+        data->stuff = i;
+        insertBack(list, data);
+        data = NULL;
+    }
+
+    data = removeFront(list);
+    assert(data->stuff == 0);
+    free(data);
+    assert(((Data*)(list->head->data))->stuff == 1);
+    assert(list->head->behind == NULL);
+    assert(list->length == 4);
+
+    data = removeFront(list);
+    assert(data->stuff == 1);
+    free(data);
+    assert(((Data*)(list->head->data))->stuff == 2);
+    assert(list->head->behind == NULL);
+    assert(list->length == 3);
+    freeList(list);
+    printf("Passed\n");
+
+    printf("=====================3.2 removeBack==========================\n");
+    list = initList(delete, compare, print);
+    assert(removeBack(list) == NULL);
+    for(int i = 0; i < 5; i++){
+        data = malloc(sizeof(Data));
+        data->stuff = i;
+        insertBack(list, data);
+        data = NULL;
+    }
+
+    data = removeBack(list);
+    assert(data->stuff == 4);
+    free(data);
+    assert(((Data*)(list->tail->data))->stuff == 3);
+    assert(list->tail->infront == NULL);
+    assert(list->length == 4);
+
+    data = removeBack(list);
+    assert(data->stuff == 3);
+    free(data);
+    assert(((Data*)(list->tail->data))->stuff == 2);
+    assert(list->tail->infront == NULL);
+    assert(list->length == 3);
+    freeList(list);
+    printf("Passed\n");
+
+    printf("=====================3.3 removeAtIndex=======================\n");
+    list = initList(delete, compare, print);
+    assert(removeAtIndex(list, 0) == NULL);
+    for(int i = 0; i < 4; i++){
+        data = malloc(sizeof(Data));
+        data->stuff = i;
+        insertBack(list, data);
+        data = NULL;
+    }
+
+    assert(removeAtIndex(list, -1) == NULL && list->length == 4);
+    assert(removeAtIndex(list, 4) == NULL && list->length == 4);
+
+    data = removeAtIndex(list, 2);
+    assert(data->stuff == 2);
+    free(data);
+    assert(list->length == 3);
+    assert(((Data*)(list->head->data))->stuff == 0);
+    assert(((Data*)(list->tail->data))->stuff == 3);
+    assert(((Data*)(list->head->infront->data))->stuff == 1);
+    assert(((Data*)(list->tail->behind->data))->stuff == 1);
+    assert(((Data*)(list->head->infront->infront->data))->stuff == 3);
+    assert(((Data*)(list->tail->behind->behind->data))->stuff == 0);
+    assert(list->head->behind == NULL);
+    assert(list->tail->infront == NULL);
+    freeList(list);
+    printf("Passed\n");
+
+    printf("====================Test 4 get functions=====================\n\n");
+    list = initList(delete, compare, print);
+    assert(getDataFromFront(list) == NULL);
+    assert(getDataFromBack(list) == NULL);
+    assert(getDataFromIndex(list, 0) == NULL);
+    for(int i = 0; i < 4; i++){
+        data = malloc(sizeof(Data));
+        data->stuff = i;
+        insertBack(list, data);
+        data = NULL;
+    }
+    printf("========================4.1 getFront=========================\n");
+    data = getDataFromFront(list);
+    assert(data->stuff == 0);
+    printf("Passed\n");
+
+    printf("========================4.2 getBack==========================\n");
+    data = getDataFromBack(list);
+    assert(data->stuff == 3);
+    printf("Passed\n");
+
+    printf("======================4.3 getAtIndex=========================\n");
+    assert(getDataFromIndex(list, -1) == NULL);
+    assert(getDataFromIndex(list, 4) == NULL);
+    for(int i = 0; i < 4; i++){
+        data = getDataFromIndex(list, i);
+        assert(data->stuff == i);
+    }
+    freeList(list);
+    printf("Passed\n");
+    printf("=============================================================\n");
+
+
+    printf("Passed all tests, make sure to run with valgrind to check for memLeaks\n");
 }
