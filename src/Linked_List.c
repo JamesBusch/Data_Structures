@@ -1,7 +1,7 @@
 /**********************
  * James Busch
- * 17/04/20
- * ver 0.03
+ * 19/04/20
+ * ver 0.04
  * 
  * This is the code for the Linked_list API
  **********************/
@@ -65,9 +65,9 @@ bool insertAtIndex(List *list, void *data, int index){
     if(data == NULL || list == NULL) return FALSE;
     if(index < 0 || index > list->length) return FALSE;
     if(index == 0){
-        return insertFront(data, list);
+        return insertFront(list, data);
     }else if(index == list->length){
-        return insertBack(data, list);
+        return insertBack(list, data);
     }
 
     Node *toPlace = malloc(sizeof(Node));
