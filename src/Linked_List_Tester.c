@@ -1,7 +1,8 @@
 /*********************
  * James Busch
- * 17/04/20
+ * 19/04/20
  * 
+ * ver 0.02
  * This is the full tester for the linked list API
  ********************/
 
@@ -31,7 +32,7 @@ char *print(void *data){
 void LinkedListTest(){
     List *list = initList(delete, compare, print);
 
-    printf("================Test 1 passing invalid inputs================\n");
+    printf("================Test 1 passing invalid inputs================\n\n");
 
     printf("======================1.1 initList===========================\n");
     assert(initList(NULL, compare, print) == NULL);
@@ -72,6 +73,91 @@ void LinkedListTest(){
     printf("===================1.5 Misc functions========================\n");
     assert(freeList(NULL) == FALSE);
     printf("Passed\n");
-
     freeList(list);
+    list = NULL;
+
+    printf("===================Test 2 insert functions===================\n\n");
+
+    printf("======================2.1 insertFront========================\n");
+    list = initList(delete, compare, print);
+    data = malloc(sizeof(Data));
+    data->stuff = 3;
+    insertFront(list, data);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 3);
+    assert(((Data*)(list->tail->data))->stuff == 3);
+    assert(list->head->behind == NULL);
+    assert(list->head->infront == NULL);
+    assert(list->tail->behind == NULL);
+    assert(list->tail->infront == NULL);
+
+    data = malloc(sizeof(Data));
+    data->stuff = 420;
+    insertFront(list, data);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 420);
+    assert(((Data*)(list->tail->data))->stuff == 3);
+    assert(((Data*)(list->head->infront->data))->stuff == 3);
+    assert(((Data*)(list->tail->behind->data))->stuff == 420);
+    assert(list->head->behind == NULL);
+    assert(list->tail->infront == NULL);
+
+    data = malloc(sizeof(Data));
+    data->stuff = 42;
+    insertFront(list, data);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 42);
+    assert(((Data*)(list->tail->data))->stuff == 3);
+    assert(((Data*)(list->head->infront->data))->stuff == 420);
+    assert(((Data*)(list->tail->behind->data))->stuff == 420);
+    assert(((Data*)(list->head->infront->infront->data))->stuff == 3);
+    assert(((Data*)(list->tail->behind->behind->data))->stuff == 42);
+    assert(list->head->behind == NULL);
+    assert(list->tail->infront == NULL);
+    freeList(list);
+    list = NULL;
+    printf("Passed\n");
+
+    printf("======================2.2 insertBack=========================\n");
+    list = initList(delete, compare, print);
+    data = malloc(sizeof(Data));
+    data->stuff = 360;
+    insertBack(list, data);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 360);
+    assert(((Data*)(list->tail->data))->stuff == 360);
+    assert(list->head->behind == NULL);
+    assert(list->head->infront == NULL);
+    assert(list->tail->behind == NULL);
+    assert(list->tail->infront == NULL);
+
+    data = malloc(sizeof(Data));
+    data->stuff = 180;
+    insertBack(list, data);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 360);
+    assert(((Data*)(list->tail->data))->stuff == 180);
+    assert(((Data*)(list->head->infront->data))->stuff == 180);
+    assert(((Data*)(list->tail->behind->data))->stuff == 360);
+    assert(list->head->behind == NULL);
+    assert(list->tail->infront == NULL);
+
+    data = malloc(sizeof(Data));
+    data->stuff = 90;
+    insertBack(list, data);
+    data = NULL;
+    assert(((Data*)(list->head->data))->stuff == 360);
+    assert(((Data*)(list->tail->data))->stuff == 90);
+    assert(((Data*)(list->head->infront->data))->stuff == 180);
+    assert(((Data*)(list->tail->behind->data))->stuff == 180);
+    assert(((Data*)(list->head->infront->infront->data))->stuff == 90);
+    assert(((Data*)(list->tail->behind->behind->data))->stuff == 360);
+    assert(list->head->behind == NULL);
+    assert(list->tail->infront == NULL);
+    freeList(list);
+    list = NULL;
+    printf("Passed\n");
+
+    printf("====================2.3 insertAtIndex========================\n");
+
 }
